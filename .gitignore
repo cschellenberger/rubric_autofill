@@ -1,0 +1,7 @@
+# Rubric Autofill
+__pycache__/
+.venv/
+.env
+*.pyc
+.DS_Store
+.vscode/

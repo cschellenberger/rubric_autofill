@@ -1,0 +1,9 @@
+# Rubric Autofill
+
+A helper tool to automate filling Brightspace rubric criteria from a CSV file.
+
+## Author
+Your Name
+
+## License
+MIT
