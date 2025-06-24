@@ -1,0 +1,39 @@
+Rubric Autofill Instructions
+===========================
+
+This tool helps you quickly fill out Brightspace rubric criteria from a CSV file using automated keystrokes.
+
+How to Use:
+-----------
+1. Open Brightspace and navigate to the rubric you want to fill in. Place your cursor in the FIRST criterion label field.
+2. Run the program (either the .exe or the Python script).
+3. When prompted, select your CSV file (e.g., rubric_test.csv) containing the rubric data.
+4. Click 'Start' in the dialog. The script will automatically fill in each field and move through the rubric using keyboard shortcuts.
+5. Wait for the process to complete. A message will appear when done.
+
+CSV Format:
+-----------
+- Each row in the CSV should have exactly 7 columns:
+    1. Criterion label
+    2. Standard 1
+    3. Standard 2
+    4. Standard 3
+    5. Feedback 1
+    6. Feedback 2
+    7. Feedback 3
+- See rubric_test.csv for an example.
+
+Tips:
+-----
+- Do not use your mouse or keyboard while the script is running, as it will send keystrokes automatically.
+- If you need to stop, close the program or press ESC (if running from Python, use Ctrl+C in the terminal).
+- For best results, use the default timing settings. If you experience issues, try increasing the delays in the script.
+
+Troubleshooting:
+----------------
+- If the script does not paste correctly, make sure your Brightspace window is active and the cursor is in the correct field before starting.
+- If you see an error about the number of columns, check your CSV for blank lines or missing fields.
+
+Contact:
+--------
+For help or to report issues, contact the script maintainer.

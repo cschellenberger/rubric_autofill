@@ -15,6 +15,7 @@
 # (This file is now a placeholder. The main script has been moved to src/rubric_autofill.py)
 
 import csv
+import sys
 import time
 from pathlib import Path
 
@@ -84,6 +85,8 @@ def autofill(csv_path: Path) -> None:
                     f"Row {row_num} has {len(row)} columns; expected {fields_expected}."
                 )
 
+            # No per-criterion prompt; only one prompt at the start
+
             for col_idx, cell in enumerate(row):
                 # Step 1 (criterion): tabs afterwards
                 if col_idx == 0:
@@ -100,7 +103,6 @@ def autofill(csv_path: Path) -> None:
                     _paste(cell)
                     pyautogui.press("tab", interval=TAB_DELAY)
                     time.sleep(TAB_DELAY)
-
             time.sleep(ROW_DELAY)
 
 
@@ -110,9 +112,8 @@ if __name__ == "__main__":
         messagebox.showinfo("Rubric Autofill", "No file selected – exiting.")
         raise SystemExit
 
-    wait_for_start()            # user positions cursor & clicks “Start”
-
     try:
+        wait_for_start()
         autofill(csv_file)
         messagebox.showinfo("Rubric Autofill", "✅ Rubric autofill complete.")
     except Exception as exc:

@@ -48,6 +48,30 @@ Blank lines are ignored. Any row with a different number of columns will cause a
    pip install -r requirements.txt
    ```
 
+## Building a Windows Executable
+
+You can create a standalone `.exe` using [PyInstaller](https://pyinstaller.org/):
+
+1. Install PyInstaller in your virtual environment:
+   ```sh
+   pip install pyinstaller
+   ```
+2. Build the executable:
+   ```sh
+   pyinstaller --onefile --noconsole src/rubric_autofill.py -n rubric_autofill
+   ```
+   - The `.exe` will be in the `dist/` folder as `rubric_autofill.exe`.
+
+3. (Optional) Test the executable by running it directly:
+   ```sh
+   dist\rubric_autofill.exe
+   ```
+
+## Publishing to GitHub Releases
+
+1. Commit and push the `dist/rubric_autofill.exe` file to your repository (or preferably, upload it as a Release asset on GitHub).
+2. On GitHub, go to the Releases section and create a new release. Attach the `.exe` file for users to download.
+
 ## Notes
 - The script uses `pyautogui` to simulate keystrokes and `pyperclip` for clipboard operations. Make sure your system allows these actions.
 - Increase the delays in the script if you experience reliability issues.
