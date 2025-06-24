@@ -1,39 +1,56 @@
 # Rubric Autofill
 
-A helper tool to automate filling Brightspace rubric criteria from a CSV file.
+A helper tool to automate filling Brightspace rubric criteria using data from a CSV file. The script simulates keystrokes to paste values into the Brightspace rubric form, making the process faster and less error-prone.
 
 ## Features
-- GUI file picker for CSV
-- Automated keystrokes to fill rubric fields
-- Clipboard integration
-- Error handling and user prompts
+- GUI file picker for CSV selection
+- Modal dialog to prompt user to focus the first rubric field
+- Simulates keystrokes for each row in the CSV:
+  - Pastes each field into the rubric form
+  - Navigates using Tab keys as required by Brightspace
+- Skips blank lines and validates column count
+- User-friendly error and completion dialogs
 
 ## Usage
-1. Run the application (no activation needed):
-   ```powershell
-   .\.venv\Scripts\python.exe -m src.rubric_autofill
+1. Run the script:
+   ```sh
+   python -m src.rubric_autofill
    ```
+2. Select your CSV file when prompted.
+3. Place the cursor in the first criterion label field in Brightspace and click "Start".
+4. The script will autofill the rubric fields row by row.
 
-## Setup
-1. Create a virtual environment:
-   ```powershell
-   py -m venv .venv
+## CSV Format
+Each row must have **7 columns**:
+1. Criterion label
+2. Standard 1
+3. Standard 2
+4. Standard 3
+5. Feedback 1
+6. Feedback 2
+7. Feedback 3
+
+Blank lines are ignored. Any row with a different number of columns will cause an error.
+
+## Requirements
+- Windows OS
+- Python 3.8+
+- Brightspace open in your browser
+
+## Installation
+1. Create a virtual environment (optional but recommended):
+   ```sh
+   python -m venv .venv
+   .venv\Scripts\activate
    ```
 2. Install dependencies:
-   ```powershell
-   .\.venv\Scripts\python.exe -m pip install -r requirements.txt
+   ```sh
+   pip install -r requirements.txt
    ```
 
-## Dependencies
-- pyautogui
-- pyperclip
-- tkinter (standard library)
+## Notes
+- The script uses `pyautogui` to simulate keystrokes and `pyperclip` for clipboard operations. Make sure your system allows these actions.
+- Increase the delays in the script if you experience reliability issues.
 
-## Project Structure
-- `src/` — main source code
-- `rubric_autofill.py` — main script (moved to `src/`)
-- `.venv/` — virtual environment
-- `requirements.txt` — dependencies
-
----
-Inspired by [attendance_autofill](https://github.com/cschellenberger/attendance_autofill)
+## License
+See [LICENSE.txt](LICENSE.txt).

@@ -24,8 +24,10 @@ import tkinter as tk
 from tkinter import filedialog, messagebox
 
 # ------------------------------ Tuning --------------------------------------#
-ROW_DELAY   = 0.35   # seconds to pause after finishing each row
-PASTE_DELAY = 0.05   # tiny pause after paste, improves reliability
+ROW_DELAY   = 0.20   # seconds to pause after finishing each row (increased for reliability)
+PASTE_DELAY = 0.20   # increased pause after paste for maximum reliability
+SELECT_PASTE_PAUSE = 0.15  # pause between select-all and paste
+TAB_DELAY = 0.25    # pause after each tab key press
 # ----------------------------------------------------------------------------#
 
 
@@ -60,9 +62,10 @@ def wait_for_start() -> None:
 
 
 def _paste(text: str) -> None:
-    """Select-all ➜ paste `text` (using clipboard) into current field."""
+    """Select-all ➜ pause ➜ paste `text` (using clipboard) into current field."""
     pyperclip.copy(text)
     pyautogui.hotkey("ctrl", "a")     # Select All
+    time.sleep(SELECT_PASTE_PAUSE)      # Short pause between select-all and paste
     pyautogui.hotkey("ctrl", "v")     # Paste
     time.sleep(PASTE_DELAY)
 
@@ -82,18 +85,21 @@ def autofill(csv_path: Path) -> None:
                 )
 
             for col_idx, cell in enumerate(row):
-                # Step 1 (criterion): two tabs afterwards
+                # Step 1 (criterion): tabs afterwards
                 if col_idx == 0:
                     _paste(cell)
-                    pyautogui.press("tab", presses=2, interval=0.02)
-                # Step 7 (last feedback): four tabs afterwards
+                    pyautogui.press("tab", presses=2, interval=TAB_DELAY)
+                    time.sleep(TAB_DELAY)
+                # Step 7 (last feedback): three tabs afterwards (not four)
                 elif col_idx == len(row) - 1:
                     _paste(cell)
-                    pyautogui.press("tab", presses=4, interval=0.02)
+                    pyautogui.press("tab", presses=3, interval=TAB_DELAY)
+                    time.sleep(TAB_DELAY)
                 # Middle fields: single tab afterwards
                 else:
                     _paste(cell)
-                    pyautogui.press("tab")
+                    pyautogui.press("tab", interval=TAB_DELAY)
+                    time.sleep(TAB_DELAY)
 
             time.sleep(ROW_DELAY)
 

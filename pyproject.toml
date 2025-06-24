@@ -1,3 +1,19 @@
+[project]
+name = "rubric-autofill"
+version = "1.0.0"
+description = "Brightspace Rubric Criteria Group autofill helper. Automates keystrokes to fill rubric forms from a CSV."
+authors = [
+    { name = "Your Name", email = "your.email@example.com" }
+]
+requires-python = ">=3.8"
+readme = "README.md"
+license = { file = "LICENSE.txt" }
+
+[project.dependencies]
+pyautogui = "*"
+pyperclip = "*"
+tk = "*"
+
 [tool.black]
 line-length = 88
 skip-string-normalization = true
